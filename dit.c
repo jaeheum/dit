@@ -1356,6 +1356,11 @@ int main(int argc, char** argv) {
       } else if (String_eq(argv[1], "-t")) {
          tabSize = atoi(argv[2]);
          name = argv[3];
+      } else if (index(argv[1], ':')){ // String_contains_i(argv[1], ":")){
+         char** namelineno = String_split(argv[1], ':');
+         name = namelineno[0]?namelineno[0]:name;
+         char* lineno = namelineno[1];
+         jump = lineno?atoi(lineno):jump;
       } else if (argv[1][0] == '+') {
          argv[1]++;
          jump = atoi(argv[1]);
