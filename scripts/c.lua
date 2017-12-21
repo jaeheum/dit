@@ -86,7 +86,16 @@ function on_change()
 end
 
 function on_save()
-   local cmd = io.popen("LANG=C gcc -I. -Ieditorconfig/include -c "..current_file.." --std=c99 2>&1")
+   local name = buffer:filename()
+   local cc -- = ""
+   if name:match("%.c$") then
+      cc = "clang --std=c99"
+   elseif name:match("%.cpp$") or name:match("%.cc$") or name:match("%.cxx$") then
+      cc = "clang++ --std=c++11"
+   else
+      return 
+   end
+   local cmd = io.popen("LANG=C "..cc.." -I. -Ieditorconfig/include -c "..current_file.." 2>&1")
    local cmdout = cmd:read("*a")
    cmd:close()
    errors = {}
