@@ -1,0 +1,11 @@
+FILES
+name suffix .ex
+name suffix .exs
+name suffix .elixir
+
+RULES
+script elixir.lua
+
+include gitconflict.dithlinc
+include elixir.dithlinc
+

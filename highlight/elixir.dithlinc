@@ -1,0 +1,199 @@
+# [number: :magenta, atom: :cyan, string: :green,
+#       boolean: :magenta, nil: :magenta]
+
+# Reserved words
+# Those are the reserved words in the Elixir language. They are detailed throughout this guide but summed up here for convenience:
+#
+# true, false, nil - used as atoms
+# when, and, or, not, in - used as operators
+# fn - used for anonymous function definitions
+# do, end, catch, rescue, after, else - used in do/end blocks
+
+rule true brightalt
+rule false brightalt
+rule nil brightalt
+
+rule when brightalt
+rule and brightalt
+rule or brightalt
+rule not brightalt
+rule in brightalt
+
+rule fn brightalt
+
+rule do brightalt
+rule end brightalt
+rule catch brightalt
+rule rescue brightalt
+rule after brightalt
+rule else brightalt
+
+# Data Types
+## Numbers
+#rule 0o`[0`-7`]`+ dim
+#rule 0x`[A`-F`|a`-f`|0`-9`]`+ dim
+#rule 0b`[0`-1`]`+ dim
+#rule `[0`-9`|_`]`+`[`|.`]`[0`-9`|_`]* dim
+#rule `[0`-9`|_`]`+`[`|.`]`[0`-9`|_`]*`[eE`]`[0`-9`]+ dim
+
+# Atoms
+#rule :`[A`-Z`|a`-z`|0`-9`|_`]`+ symbol
+#rule `[A`-Z`|a`-z`|0`-9`|_`]`+: symbol
+rule :true brightalt
+rule :false brightalt
+rule :nil brightalt
+
+## XXX attributes
+rule @`[A`-Z`|a`-z`|0`-9`|_`]`+ symbol
+
+## Strings
+rule " diff
+context " " diff
+   rule \\ brightalt
+   rule \" brightalt
+   eager_rule \`[abcfnrtv`] brightalt
+   rule " diff
+/context
+
+## Charlists 'abc'
+rule ' dim
+context ' '  dim
+   rule \\ brightalt
+   rule \" brightalt
+   eager_rule \`[abcfnrtv`] brightalt
+   rule ' dim
+/context
+
+## Lists, tuples, and binaries
+## Maps and keyword lists
+## Structs
+### taken care by Atoms
+
+
+# Some extra keywords not directly mentioned in the reference
+rule if brightalt
+rule then brightalt
+rule else brightalt
+
+rule case brightalt
+rule cond brightalt
+rule end brightalt
+
+rule quote brightalt
+rule unquote brightalt
+rule super brightalt
+rule spawn brightalt
+rule spawn_link brightalt
+rule spawn_monitor brightalt
+
+rule defmodule brightalt
+rule def brightalt
+rule defp brightalt
+rule defmacro brightalt
+rule defmacrop brightalt
+rule defprotocol brightalt
+rule end brightalt
+
+
+rule is_function brightalt
+rule is_integer brightalt
+rule is_list brightalt
+rule is_map brightalt
+rule is_nil brightalt
+rule is_number brightalt 
+rule is_pid brightalt
+rule is_port brightalt
+rule is_reference brightalt
+rule is_tuple brightalt
+rule abs brightalt
+rule binary_part brightalt
+rule bit_size brightalt
+rule byte_size brightalt
+rule div brightalt
+rule elem brightalt
+rule hd brightalt
+rule length brightalt
+rule map_size brightalt
+rule node brightalt
+rule rem brightalt
+rule round brightalt
+rule tl brightalt
+rule trunc brightalt
+rule tuple_size brightalt
+
+## Operators
+rule @ symbol
+rule . symbol
+rule + symbol
+rule - symbol
+rule ! symbol
+rule ^ symbol
+rule ~~~ symbol
+rule * symbol
+rule / symbol
+rule ++ symbol
+rule -- symbol
+rule .. symbol
+rule <> symbol
+rule |> symbol
+rule <<< symbol
+rule >>> symbol
+rule ~>> symbol
+rule <<~ symbol
+rule ~> symbol
+rule <~ symbol
+rule <~> symbol
+rule <|> symbol
+rule < symbol
+rule > symbol
+rule <= symbol
+rule >= symbol
+rule == symbol
+rule != symbol
+rule =~ symbol
+rule === symbol
+rule !== symbol
+rule && symbol
+rule &&& symbol
+rule || symbol
+rule ||| symbol
+rule = symbol
+rule => symbol
+rule | symbol
+rule :: symbol
+rule <- symbol
+rule \\ symbol
+rule & symbol
+rule : brightalt
+
+## Sigils
+#rule { symbol
+#rule } symbol
+#rule [ symbol
+#rule ] symbol
+#rule ( symbol
+#rule ) symbol
+
+## Aliases
+rule __aliases__ symbol
+rule __MODULE__ symbol
+
+#context :: `$ brightspecial diff diff
+#   rule -> brightspecial
+#/context
+
+
+
+
+#rule '\`[\'`]' brightalt
+#rule '`[A`-Z`|a`-z`|!@#$%^&*(){}][<>"/=+?_|:-,.`]' brightalt
+
+context # `$ dim
+   rule TODO veryspecial
+   rule XXX veryspecial
+   rule FIXME veryspecial
+/context
+
+context `` `` diff
+   rule `` diff
+/context
