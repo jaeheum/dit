@@ -142,6 +142,8 @@ STATIC int Script_Buffer_token(lua_State* L) {
    Buffer* buffer = (Buffer*) ((Proxy*)luaL_checkudata(L, 1, "Buffer"))->ptr;
    const char* line = Buffer_currentLine(buffer);
    int x = buffer->x;
+   // XXX s/isword/istoken/ std::tie<S> set_of_s; std::set<S>::iterator
+   // XXX context sensitivity with buffer's name?
    while (x > 0 && isword(line[x-1])) x--;
    if (!isword(line[x])) return 0;
    int len = 0;

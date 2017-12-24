@@ -1,6 +1,8 @@
 FILES
 name suffix .md
+name suffix .txt
 RULES
+script txt.lua
 
 include markdown.dithlinc
 

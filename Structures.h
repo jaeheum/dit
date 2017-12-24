@@ -750,7 +750,7 @@ struct MatchArgs_ {
 };
 
 #ifndef isword
-#define isword(x) (isalpha(x) || x == '_')
+#define isword(x) (isalpha(x) || x == '_' || x == ':')
 #endif
 
 
