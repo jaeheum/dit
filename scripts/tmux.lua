@@ -20,10 +20,14 @@ function tmux.dict()
    cmd.run("tmux splitw 'sdcv -n %s |less'", token)
 end
 
-function tmux.newsidepane()
-   local token = get_context()
-   if not token then return end
-   cmd.run("tmux splitw -h dit '%s'", token)
+function tmux.new()
+   cmd.run("tmux splitw -h dit")
+end
+
+--https://github.com/junegunn/fzf/wiki/Examples
+function tmux.fzf()
+   local filechosen = cmd.run("fzf")
+   cmd.run("tmux splitw -h dit %s", filechosen)
 end
 
 return tmux

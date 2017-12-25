@@ -3,7 +3,6 @@ local cscope = require("cscope")
 local tmux = require("tmux")
 local code = require("dit.code")
 local tab_complete = require("dit.tab_complete")
-local line_commit = require("dit.line_commit")
 
 local current_file = nil
 local errors = nil
@@ -37,16 +36,18 @@ end
 function on_ctrl(key)
    if key == "D" then
       cscope.go_to_definition()
-   elseif key == "R" then
-      popup_error()
    elseif key == "H" then
       open_header()
+   elseif key == "N" then
+      tmux.new()
    elseif key == "O" then
-      line_commit.line_commit()
-   elseif key == "_" then
-      code.comment_block("//")
+      tmux.fzf() -- line_commit.line_commit()
    elseif key == "P" then
       tmux.man()
+   elseif key == "R" then
+      popup_error()
+   elseif key == "_" then
+      code.comment_block("//")
    end
 end
 

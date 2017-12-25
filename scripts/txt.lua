@@ -8,7 +8,9 @@ function on_ctrl(key)
    if key == "D" then
       tmux.dict()
    elseif key == "N" then
-      tmux.newsidepane()
+      tmux.new()
+   elseif key == "O" then
+      tmux.fzf()
    elseif key == "P" then
       tmux.man()
    end
