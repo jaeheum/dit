@@ -11,7 +11,13 @@ end
 function tmux.man()
    local token = get_context()
    if not token then return end
-   cmd.run("tmux splitw w3mman '%s'", token)
+   local name = buffer:filename()
+   if not (name:match("%.cc$") or name:match("%.cpp$") or name:match("%.cxx$")) then
+      cmd.run("tmux splitw w3mman -M $(manpath 2>/dev/null) '%s'", token)
+   else
+      -- XXX assume stdman lookup (not libc ... problematic)
+      cmd.run("tmux splitw man '%s'", (token:match('^std::') and token or "std::"..token))
+   end
 end
 
 function tmux.dict()
