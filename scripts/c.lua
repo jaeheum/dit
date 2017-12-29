@@ -90,13 +90,13 @@ function on_save()
    local name = buffer:filename()
    local cc -- = ""
    if name:match("%.c$") then
-      cc = "clang --std=c99"
+      cc = "clang -fsyntax-only --std=c99"
    elseif name:match("%.cpp$") or name:match("%.cc$") or name:match("%.cxx$") then
-      cc = "clang++ --std=c++11"
+      cc = "clang++ -fsyntax-only --std=c++11 -lpthread"
    else
       return 
    end
-   local cmd = io.popen("LANG=C "..cc.." -I. -Ieditorconfig/include -c "..current_file.." 2>&1")
+   local cmd = io.popen("LANG=C "..cc.." -I. -Ieditorconfig/include -I$HOME/include -c "..current_file.." 2>&1")
    local cmdout = cmd:read("*a")
    cmd:close()
    errors = {}
