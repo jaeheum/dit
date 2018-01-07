@@ -94,7 +94,7 @@ function on_save()
    elseif name:match("%.cpp$") or name:match("%.cc$") or name:match("%.cxx$") then
       cc = "clang++ -fsyntax-only --std=c++11 -lpthread"
    else
-      return 
+      return true 
    end
    local cmd = io.popen("LANG=C "..cc.." -I. -Ieditorconfig/include -I$HOME/include -c "..current_file.." 2>&1")
    local cmdout = cmd:read("*a")
